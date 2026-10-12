@@ -1,0 +1,6 @@
+{
+  "name": "NoteGrid AI",
+  "description": "The Simple, Universal Digital Canvas & Notepad for Everyone. Instant rich text typing, freehand digital pen drawing, hybrid overlay, encrypted sharing, and context-aware AI assistance.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
