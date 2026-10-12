@@ -15,6 +15,7 @@ import {
   RotateCw,
 } from "lucide-react";
 import { ChatMessage, Flashcard, NoteDocument, ThemeMode } from "../types";
+import { requestAiAssist } from "../utils/aiService";
 
 interface AiAssistantDrawerProps {
   isOpen: boolean;
@@ -97,19 +98,13 @@ export const AiAssistantDrawer: React.FC<AiAssistantDrawerProps> = ({
 
     try {
       const drawingDataUrl = getCanvasDataUrl ? getCanvasDataUrl() : undefined;
-      const response = await fetch("/api/gemini/assist", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          action,
-          noteTitle: activeNote.title,
-          noteContent: activeNote.content,
-          prompt: customPrompt,
-          drawingDataUrl,
-        }),
+      const data = await requestAiAssist({
+        action,
+        noteTitle: activeNote.title,
+        noteContent: activeNote.content,
+        prompt: customPrompt,
+        drawingDataUrl,
       });
-
-      const data = await response.json();
 
       if (Array.isArray(data.flashcards) && data.flashcards.length > 0) {
         setFlashcards(data.flashcards);
